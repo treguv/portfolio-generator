@@ -5,6 +5,7 @@ const generatePage = require("./src/page-template.js");
 
 // const [name, github] = profileDataArgs;
 const promptUser = () => {
+  console.log("asking questions");
   return inquirer.prompt([
     {
       type: "input",
@@ -137,6 +138,7 @@ Add a New Project
       },
     ])
     .then((projectData) => {
+      console.log("in project data");
       portfolioData.projects.push(projectData);
       if (projectData.confirmAddProject) {
         return promptProject(portfolioData);
@@ -150,13 +152,17 @@ promptUser()
   .then((portfolioData) => {
     const pageHTML = generatePage(portfolioData);
 
-    fs.writeFile("index.html", pageHTML, (err) => {
+    fs.writeFile("./dist/index.html", pageHTML, (err) => {
       if (err) throw new Error(err);
+
+      console.log("page created, check out index.html");
+
+      fs.copyFile("./src/style.css", "./dist/style.css", (err) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("copied successfully");
+      });
     });
   });
-
-fs.writeFile("./dist/index.html", generatePage(name, github), (err) => {
-  if (err) throw err;
-  console.log("portfolio complete!");
-});
-console.log(inquirer);
