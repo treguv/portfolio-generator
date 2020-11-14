@@ -152,10 +152,7 @@ promptUser()
 
     fs.writeFile("index.html", pageHTML, (err) => {
       if (err) throw new Error(err);
-      console.log("portfolio complete!");
-    });
-    // console.log(inquirer);
-  });
+git});
 // fs.writeFile("index.html", generatePage(name, github), (err) => {
 //   if (err) throw err;
 //   console.log("portfolio complete!");
